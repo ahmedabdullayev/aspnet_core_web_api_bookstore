@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ConsoleToWEBApi
 {
@@ -9,23 +10,19 @@ namespace ConsoleToWEBApi
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+          
+            app.UseDeveloperExceptionPage();
+          
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello from web api");
-                });
-                endpoints.MapGet("/test", async context =>
-                {
-                    await context.Response.WriteAsync("Hello from test web api");
-                });
+                endpoints.MapControllers();
             });
         }
     }
