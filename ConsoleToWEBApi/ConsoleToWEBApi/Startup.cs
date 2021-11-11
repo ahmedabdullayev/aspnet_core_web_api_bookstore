@@ -12,16 +12,21 @@ namespace ConsoleToWEBApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<CustomMiddleware>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
-            
+
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
                 Console.WriteLine("dev mode;;");
+            }
 
-                app.Use(async (context, next) =>
+            app.UseMiddleware<CustomMiddleware>();
+            
+            app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("hello from use 1 \n");
                 await next();
@@ -48,8 +53,7 @@ namespace ConsoleToWEBApi
         {
             app.Use(async (context, next) =>
             {
-                await context.Response.WriteAsync("hello path middleware");
-                await next();
+                await context.Response.WriteAsync("hello path middleware \n");
             });
         }
     }
