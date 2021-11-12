@@ -21,24 +21,23 @@ namespace ConsoleToWEBApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                Console.WriteLine("dev mode;;");
             }
 
-            app.UseMiddleware<CustomMiddleware>();
+           // app.UseMiddleware<CustomMiddleware>();
             
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("hello from use 1 \n");
-                await next();
-            });
-
-             app.Map("/ahab", CustomCode);
-             
-             app.Use(async (context, next) =>
-             {
-                 await context.Response.WriteAsync(" keke \n");
-             });
-            
+            // app.Use(async (context, next) =>
+            // {
+            //     await context.Response.WriteAsync("hello from use 1 \n");
+            //     await next();
+            // });
+            //
+            //  app.Map("/ahab", CustomCode);
+            //  
+            //  app.Use(async (context, next) =>
+            //  {
+            //      await context.Response.WriteAsync(" keke \n");
+            //  });
+            //
            
 
             app.UseRouting();
