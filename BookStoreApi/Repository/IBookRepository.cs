@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BookStoreApi.Models;
+
 namespace BookStoreApi.Repository
 {
-    public class IBookRepository
+    public interface IBookRepository
     {
-        
+        Task<List<BookModel>> GetAllBooksAsync();
     }
 }

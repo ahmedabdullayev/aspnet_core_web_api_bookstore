@@ -1,0 +1,4 @@
+dotnet ef migrations add InitialMigration --project BookStoreApi
+dotnet ef database update --project BookStoreApi
+dotnet ef database drop  --project BookStoreApi
+

@@ -1,7 +1,30 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BookStoreApi.Data;
+using BookStoreApi.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookStoreApi.Repository
 {
     public class BookRepository : IBookRepository
     {
+        private readonly BookStoreContext _context;
+        public BookRepository(BookStoreContext context)
+        {
+            _context = context;
+        }
+        public async Task<List<BookModel>> GetAllBooksAsync()
+        {
+            var records = await _context.Books.Select(i => new BookModel()
+            {
+                Id = i.Id,
+                Title = i.Title,
+                Description = i.Description
+            }).ToListAsync();
+
+            return records;
+        }
         
     }
 }
