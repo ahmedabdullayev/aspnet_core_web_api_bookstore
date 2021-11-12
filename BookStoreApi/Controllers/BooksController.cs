@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using BookStoreApi.Models;
 using BookStoreApi.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +35,13 @@ namespace BookStoreApi.Controllers
                 return NotFound();
             }
             return Ok(book);
+        }
+        [HttpPost("books")]
+        public async Task<IActionResult> AddNewBook([FromBody]BookModel bookModel)
+        {
+            
+            var id = await _bookRepository.AddBookAsync(bookModel);
+            return CreatedAtAction(nameof(GetBookId), new {id = id, controller = "books"}, "Added product with id: " + id);
         }
     }
 }
