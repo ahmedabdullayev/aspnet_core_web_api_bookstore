@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStoreApi.Models;
 using BookStoreApi.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,18 @@ namespace BookStoreApi.Controllers
         public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
+        }
+
+        [HttpPost("signup")]
+        public async Task<IActionResult> SignUp([FromBody] SignupModel signupModel)
+        {
+            var result = await _accountRepository.SignUpUserAsync(signupModel);
+            if (result.Succeeded)
+            {
+                return Ok(result.Succeeded);
+            }
+
+            return Unauthorized(result.Errors);
         }
     }
 }

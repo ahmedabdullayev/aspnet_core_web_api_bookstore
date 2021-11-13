@@ -38,6 +38,19 @@ namespace BookStoreApi
                 .AddEntityFrameworkStores<BookStoreContext>()
                 .AddDefaultTokenProviders();
             
+            services.Configure<IdentityOptions>(options => // lambda expression
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(20);
+                // options.Lockout.MaxFailedAccessAttempts = 3;
+            });
+            
             services.AddControllers().AddNewtonsoftJson();
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();

@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using BookStoreApi.Models;
 using BookStoreApi.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
