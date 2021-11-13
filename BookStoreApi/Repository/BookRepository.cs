@@ -71,7 +71,7 @@ namespace BookStoreApi.Repository
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
         }
-
+        //also can remove column(make it null)
         public async Task UpdateBookPatchAsync(int bookId, JsonPatchDocument bookModel)
         {
             var book = await _context.Books.FindAsync(bookId);
